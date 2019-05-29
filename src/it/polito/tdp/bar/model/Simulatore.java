@@ -1,6 +1,7 @@
 package it.polito.tdp.bar.model;
 
 import java.time.LocalTime;
+import java.util.List;
 import java.util.PriorityQueue;
 import java.util.Random;
 
@@ -11,6 +12,10 @@ public class Simulatore {
 	//CREAZIONE CODA DEGLI EVENTI
 	
 	private PriorityQueue<Evento> queue;
+	
+	private PriorityQueue<Evento> codaTavoli;
+	
+	private List<Tavolo> listaTavoli;
 	
 	//parametri della simulazione
 	
@@ -38,12 +43,14 @@ public class Simulatore {
 		 num_TAVOLI_tipoC=4;
 		 num_TAVOLI_tipoD=5;
 		 num_NUMERICLIENTIARRIVO=numeroclienti;
+		 
+		 Random random = new Random();
 		 //inizializzo gli eventi iniziali
 		 eventoarrivo=new Evento(LocalTime.now(), i, null, i, null);
 		 
 		 
 		 for(int i=1;i<=2000;i++) {
-			 eventoarrivo=new Evento(LocalTime.now().plusMinutes(Math.random()*10), (Math.random()*10)+1, Duration.minutes(Math.random(60,120)),Math.random() ,ARRIVO_GRUPPO_CLIENTI);
+			 eventoarrivo=new Evento(LocalTime.now().plusMinutes(Math.random()*10), (Math.random()*10)+1, Duration.minutes(60+Math.random()*60),Math.random() ,ARRIVO_GRUPPO_CLIENTI);
 			 
 		 }
 	
@@ -57,9 +64,21 @@ public class Simulatore {
 		while(queue.poll()!=null) {
 			
 			Evento ev = queue.poll();
+			
 			switch ( ev.getTipoevento()) {
 			
 			case ARRIVO_GRUPPO_CLIENTI:
+				
+				if(ev.getTolleranza()==0.0) {
+					numero_clienti_insoddisfatti++;
+				}else {
+					int numbanconepossibili;
+					int numTavoloPrioritari;
+					numbanconepossibili=ev.getNum_persone()*ev.getTolleranza();
+					numTavoloPrioritari=ev.getNum_persone()*ev.getTolleranza();
+				}
+				
+				
 				
 				break;
 				
@@ -87,6 +106,11 @@ public int totpostiTavoliliberi() {
 	
 	return s;
 
+}
+
+public int metapostitavolo(Tavolo t) {
+	int temporanea = (int) (t.getPosti_occupati()*0.5);
+	return temporanea;
 }
 
 	

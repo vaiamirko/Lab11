@@ -9,6 +9,7 @@ public class Evento {
 		ARRIVO_GRUPPO_CLIENTI,
 		SERVIZIO_TAVOLO,
 		SERVIZIO_BANCONE,
+		USCITA_CLIENTE,
 		
 		
 	}
