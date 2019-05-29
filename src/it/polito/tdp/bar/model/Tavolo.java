@@ -5,7 +5,9 @@ import java.util.Comparator;
 public class Tavolo implements Comparator<Tavolo>{
 	
 	private int posti_disponibili;
-	private int posti_occupati;
+	//private int posti_occupati;
+	private int numeroTavoliDisponibili;
+	
 	
 	public int getPosti_disponibili() {
 		return posti_disponibili;

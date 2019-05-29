@@ -2,6 +2,7 @@ package it.polito.tdp.bar.model;
 
 import java.time.LocalTime;
 import java.util.List;
+import java.util.Map;
 import java.util.PriorityQueue;
 import java.util.Random;
 
@@ -13,9 +14,14 @@ public class Simulatore {
 	
 	private PriorityQueue<Evento> queue;
 	
+	//gestione dei tavoli
+	
 	private PriorityQueue<Evento> codaTavoli;
 	
 	private List<Tavolo> listaTavoli;
+	
+	private Map<Integer,Tavolo> mappatavoli;
+	
 	
 	
 	
@@ -78,6 +84,8 @@ public class Simulatore {
 					int numTavoloPrioritari;
 					numBanconePossibili=ev.getNum_persone()*ev.getTolleranza();
 					numTavoloPrioritari=ev.getNum_persone()*ev.getTolleranza();
+				
+				
 				}
 				
 				
@@ -117,7 +125,13 @@ public int metapostitavolo(Tavolo t) {
 
 public Tavolo ricercaTavoloPiccolo(int numPersone) {
 	
-	
+	for(Integer i : mappatavoli.keySet()) {
+		if(i>=numPersone)
+			return mappatavoli.get(i);
+		
+	}
+		
+	return null;
 	
 	
 }
