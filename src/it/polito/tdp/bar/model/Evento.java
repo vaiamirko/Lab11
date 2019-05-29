@@ -58,6 +58,11 @@ public class Evento {
 	public void setTipoevento(TIPO tipoevento) {
 		Tipoevento = tipoevento;
 	}
+	@Override
+	public String toString() {
+		return "Evento [data=" + data + ", num_persone=" + num_persone + ", durata=" + durata + ", tolleranza="
+				+ tolleranza + ", Tipoevento=" + Tipoevento + "]";
+	}
 	
 	
 	

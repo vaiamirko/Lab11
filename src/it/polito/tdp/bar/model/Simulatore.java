@@ -44,6 +44,9 @@ public class Simulatore {
 	
 	public void init(int numeroeventi)
 	{
+		//pulisco la coda
+		queue.clear();
+		//creo gli eventi arrivoclienti
 		Evento eventoarrivo;
 		//inizializzo i parametri iniziali
 		num_TAVOLI_tipoA=2;
@@ -77,6 +80,8 @@ public class Simulatore {
 			
 			case ARRIVO_GRUPPO_CLIENTI:
 				
+				numero_totale_clienti+=ev.getNum_persone();
+				
 				if(ev.getTolleranza()==0.0) {
 					numero_clienti_insoddisfatti++;
 				}else {
@@ -84,7 +89,20 @@ public class Simulatore {
 					int numTavoloPrioritari;
 					numBanconePossibili=ev.getNum_persone()*ev.getTolleranza();
 					numTavoloPrioritari=ev.getNum_persone()*ev.getTolleranza();
-				
+					if(this.ricercaTavoloPiccolo(ev.getNum_persone())!=null) {
+						//se esiste un tavolo dispobibile
+						
+						//creo l'evento di servizio al tavolo
+						queue.add(new Evento());
+						//aggiorno la stitistica dei clienti soddisfatti
+					
+					}else {//non vengono soddisfatti i clienti e quindi li mando al bancone
+						
+						//creo l'evento di mandare al bancone...
+						queue.add(new Evento());
+						
+						
+					}
 				
 				}
 				
@@ -93,9 +111,18 @@ public class Simulatore {
 				break;
 				
 			case SERVIZIO_TAVOLO:
+				
+				
+			
+				numero_clienti_soddisfatti = ev.getNum_persone()+numero_clienti_soddisfatti;
 				break;
 				
 			case SERVIZIO_BANCONE:
+				int numeroClietiTolleranti;
+				numeroClietiTolleranti=ev.getNum_persone()*ev.getTolleranza();
+				
+				numero_clienti_soddisfatti+=numeroClietiTolleranti;
+				
 				break;
 				
 			
@@ -119,15 +146,31 @@ public int totpostiTavoliliberi() {
 }
 
 public int metapostitavolo(Tavolo t) {
-	int temporanea = (int) (t.getPosti_occupati()*0.5);
+	int temporanea = (int) (t.getPosti_disponibili()*0.5);
 	return temporanea;
 }
 
 public Tavolo ricercaTavoloPiccolo(int numPersone) {
 	
+	//trovo il minimo che è più grande 
+	int min=10000000;
+	/*
 	for(Integer i : mappatavoli.keySet()) {
-		if(i>=numPersone)
-			return mappatavoli.get(i);
+		if(i>=numPersone && mappatavoli.get(i).getNumeroTavoliDisponibili()>0 && numPersone>metapostitavolo(mappatavoli.get(i)))
+			min=i;
+	}
+	*/
+	for(Integer i : mappatavoli.keySet()) {
+		if(i>=numPersone && mappatavoli.get(i).getNumeroTavoliDisponibili()>0 && numPersone>metapostitavolo(mappatavoli.get(i))) {
+			
+			Tavolo tav = new Tavolo();
+			
+			tav = mappatavoli.get(i);
+			
+			mappatavoli.get(i).occupatavolo();
+			return tav;
+		}
+			
 		
 	}
 		

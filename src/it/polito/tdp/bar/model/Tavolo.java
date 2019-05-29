@@ -15,11 +15,12 @@ public class Tavolo implements Comparator<Tavolo>{
 	public void setPosti_disponibili(int posti_disponibili) {
 		this.posti_disponibili = posti_disponibili;
 	}
-	public int getPosti_occupati() {
-		return posti_occupati;
+	
+	public int getNumeroTavoliDisponibili() {
+		return numeroTavoliDisponibili;
 	}
-	public void setPosti_occupati(int posti_occupati) {
-		this.posti_occupati = posti_occupati;
+	public void setNumeroTavoliDisponibili(int numeroTavoliDisponibili) {
+		this.numeroTavoliDisponibili = numeroTavoliDisponibili;
 	}
 	@Override
 	public int compare(Tavolo o1, Tavolo o2) {
@@ -28,7 +29,13 @@ public class Tavolo implements Comparator<Tavolo>{
 	}
 	
 	
+	public void occupatavolo() {
+		this.numeroTavoliDisponibili--;
+	}
 	
+	public void liberatavolo() {
+		this.numeroTavoliDisponibili++;
+	}
 	
 	
 
