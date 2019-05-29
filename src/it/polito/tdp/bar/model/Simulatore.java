@@ -17,6 +17,8 @@ public class Simulatore {
 	
 	private List<Tavolo> listaTavoli;
 	
+	
+	
 	//parametri della simulazione
 	
 	private int num_TAVOLI_tipoA;
@@ -72,9 +74,9 @@ public class Simulatore {
 				if(ev.getTolleranza()==0.0) {
 					numero_clienti_insoddisfatti++;
 				}else {
-					int numbanconepossibili;
+					int numBanconePossibili;
 					int numTavoloPrioritari;
-					numbanconepossibili=ev.getNum_persone()*ev.getTolleranza();
+					numBanconePossibili=ev.getNum_persone()*ev.getTolleranza();
 					numTavoloPrioritari=ev.getNum_persone()*ev.getTolleranza();
 				}
 				
@@ -111,6 +113,13 @@ public int totpostiTavoliliberi() {
 public int metapostitavolo(Tavolo t) {
 	int temporanea = (int) (t.getPosti_occupati()*0.5);
 	return temporanea;
+}
+
+public Tavolo ricercaTavoloPiccolo(int numPersone) {
+	
+	
+	
+	
 }
 
 	

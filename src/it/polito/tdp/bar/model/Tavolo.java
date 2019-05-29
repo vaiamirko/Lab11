@@ -1,6 +1,8 @@
 package it.polito.tdp.bar.model;
 
-public class Tavolo {
+import java.util.Comparator;
+
+public class Tavolo implements Comparator<Tavolo>{
 	
 	private int posti_disponibili;
 	private int posti_occupati;
@@ -16,6 +18,11 @@ public class Tavolo {
 	}
 	public void setPosti_occupati(int posti_occupati) {
 		this.posti_occupati = posti_occupati;
+	}
+	@Override
+	public int compare(Tavolo o1, Tavolo o2) {
+		// TODO Auto-generated method stub
+		return o1.posti_disponibili-o2.posti_disponibili;
 	}
 	
 	
